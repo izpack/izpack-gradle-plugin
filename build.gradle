@@ -1,7 +1,7 @@
 plugins {
     id 'groovy'
     id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish' version '0.12.0'
+    id 'com.gradle.plugin-publish' version '2.0.0'
 }
 
 apply from: "$rootDir/gradle/functional-test.gradle"
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation('org.spockframework:spock-core:1.2-groovy-2.5') {
+    testImplementation('org.spockframework:spock-core:2.3-groovy-4.0') {
         exclude group: 'org.codehaus.groovy'
     }
 }
