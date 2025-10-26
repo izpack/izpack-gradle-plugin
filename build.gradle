@@ -50,8 +50,8 @@ testing {
                 implementation('org.spockframework:spock-core:2.3-groovy-4.0') {
                     exclude group: 'org.codehaus.groovy'
                 }
-                implementation('org.junit.jupiter:junit-jupiter-api:5.10.0')
-                runtimeOnly('org.junit.jupiter:junit-jupiter-engine:5.10.0')
+                implementation('org.junit.jupiter:junit-jupiter-api:6.0.0')
+                runtimeOnly('org.junit.jupiter:junit-jupiter-engine:6.0.0')
             }
         }
     }
