@@ -2,30 +2,32 @@ package com.bmuschko.gradle.izpack
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
+
+import java.nio.file.Files
+import java.nio.file.Path
 
 class IzPack4PluginFunctionalTest extends Specification {
-    @Rule TemporaryFolder temporaryFolder = new TemporaryFolder()
-
+    @TempDir
+    Path tempDir
     File projectDir
     File buildFile
     File settingsFile
 
     def setup() {
-        projectDir = temporaryFolder.root
-        buildFile = temporaryFolder.newFile('build.gradle')
-        settingsFile = temporaryFolder.newFile('settings.gradle')
+        projectDir = tempDir.toFile()
+        buildFile = tempDir.resolve('build.gradle').toFile()
+        settingsFile = tempDir.resolve('settings.gradle').toFile()
         buildFile << buildFileDefault()
         settingsFile << settingsFile()
     }
 
     def "can create installer with default settings"() {
         given:
-        def installerDir = temporaryFolder.newFolder('src', 'main', 'izpack')
+        def installerDir = Files.createDirectories(tempDir.resolve('src/main/izpack')).toFile()
         new File(installerDir, 'install.xml') << installationFile()
-        temporaryFolder.newFolder('build', 'assemble', 'izpack')
+        Files.createDirectories(tempDir.resolve('build/assemble/izpack'))
 
         when:
         build('izPackCreateInstaller')
@@ -37,9 +39,9 @@ class IzPack4PluginFunctionalTest extends Specification {
     def "can create installer with custom settings"() {
         given:
         buildFile << buildFileCustomSettings()
-        def installerDir = temporaryFolder.newFolder('installer', 'izpack')
+        def installerDir = Files.createDirectories(tempDir.resolve('installer/izpack')).toFile()
         new File(installerDir, 'installer.xml') << installationFile()
-        temporaryFolder.newFolder('build', 'my', 'izpack')
+        Files.createDirectories(tempDir.resolve('build/my/izpack'))
 
         when:
         build('izPackCreateInstaller')

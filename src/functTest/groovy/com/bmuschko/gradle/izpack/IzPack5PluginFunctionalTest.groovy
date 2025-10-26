@@ -6,7 +6,7 @@ class IzPack5PluginFunctionalTest extends IzPack4PluginFunctionalTest {
   protected String buildFileIzPackDependency() {
     """
         dependencies {
-            izpack 'org.codehaus.izpack:izpack-ant:5.1.3'
+            izpack 'org.codehaus.izpack:izpack-ant:5.2.4'
         }
     """
   }
