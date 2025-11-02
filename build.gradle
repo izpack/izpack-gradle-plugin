@@ -1,33 +1,20 @@
 plugins {
     id 'groovy'
     id 'java-gradle-plugin'
+    id 'jvm-test-suite'
     id 'com.gradle.plugin-publish' version '2.0.0'
 }
 
-apply from: "$rootDir/gradle/functional-test.gradle"
-apply from: "$rootDir/gradle/additional-artifacts.gradle"
-
 group = 'org.izpack'
-version = '3.2.2'
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+version = '4.0.0'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation('org.spockframework:spock-core:2.3-groovy-3.0') {
-        exclude group: 'org.codehaus.groovy'
-    }
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.withType(Test).configureEach {
-    useJUnitPlatform()
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 jar {
@@ -41,17 +28,53 @@ jar {
     }
 }
 
-gradlePlugin {
-    website = 'https://github.com/izpack/gradle-izpack-plugin'
-    vcsUrl = 'https://github.com/izpack/gradle-izpack-plugin'
+tasks.register('groovydocJar', Jar) {
+    dependsOn groovydoc
+    archiveClassifier = 'groovydoc'
+    from groovydoc.destinationDir
+}
 
+testing {
+    suites {
+        functionalTest(JvmTestSuite) {
+            useSpock()
+
+            sources {
+                groovy {
+                    setSrcDirs(['src/functTest/groovy'])
+                }
+            }
+
+            dependencies {
+                implementation configurations.testRuntimeClasspath
+                implementation('org.spockframework:spock-core:2.3-groovy-4.0') {
+                    exclude group: 'org.codehaus.groovy'
+                }
+                implementation('org.junit.jupiter:junit-jupiter-api:6.0.0')
+                runtimeOnly('org.junit.jupiter:junit-jupiter-engine:6.0.0')
+            }
+        }
+    }
+}
+
+test {
+    finalizedBy testing.suites.functionalTest
+}
+
+tasks.named("check") {
+    dependsOn(testing.suites.functionalTest)
+}
+
+gradlePlugin {
+    website = "https://github.com/izpack/izpack-gradle-plugin"
+    vcsUrl = "https://github.com/izpack/izpack-gradle-plugin"
     plugins {
-        izpackPlugin {
+        create('izpack-plugin') {
             id = 'org.izpack'
             displayName = 'IzPack Gradle Plugin'
             description = 'Plugin that provides support for packaging applications for the Java platform via IzPack.'
-            tags.set(['packaging', 'distribution', 'installer'])
-            implementationClass = 'com.bmuschko.gradle.izpack.IzPackPlugin'
+            implementationClass = 'org.izpack.gradle.IzPackPlugin'
+            tags = ['packaging', 'distribution', 'installer']
         }
     }
 }

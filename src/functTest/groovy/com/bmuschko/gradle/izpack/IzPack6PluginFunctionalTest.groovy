@@ -1,12 +1,12 @@
 package com.bmuschko.gradle.izpack
 
-class IzPack5PluginFunctionalTest extends IzPackPluginSpecification {
+class IzPack6PluginFunctionalTest extends IzPackPluginSpecification {
 
     @Override
     protected String buildFileIzPackDependency() {
         """
         dependencies {
-            izpack 'org.codehaus.izpack:izpack-ant:5.2.4'
+            izpack 'org.codehaus.izpack:izpack-ant:6.0.0-SNAPSHOT'
         }
         """
     }

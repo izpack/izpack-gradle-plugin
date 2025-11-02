@@ -13,8 +13,8 @@ jobs:
         fetch-depth: 0
     - uses: actions/setup-java@v5
       with:
-        distribution: zulu
-        java-version: 11
+        distribution: temurin
+        java-version: 21
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
@@ -24,6 +24,4 @@ jobs:
       with:
         name: gradle-izpack-plugin.jar
         path: build/libs/*.jar
-    - name: Release
-      if: startsWith(github.ref, 'refs/tags/')
-      run: ./gradlew publishPlugins -Pgradle.publish.key=${{ secrets.PLUGIN_PORTAL_KEY }} -Pgradle.publish.secret=${{ secrets.PLUGIN_PORTAL_SECRET }} -is
+
