@@ -1,3 +1,7 @@
+### Version 3.2.2 (October 28, 2025)
+
+* Update plugin metadata under new org.izpack
+
 ### Version 3.2.1 (October 28, 2025)
 
 * Preparation for move to izpack.org
