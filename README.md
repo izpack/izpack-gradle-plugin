@@ -2,21 +2,6 @@
 
 ![IzPack Logo](https://izpack.org/img-izpack/logo-medium.png)
 
-<table style="border: 1px solid">
-    <tr>
-        <td>
-            Over the past couple of years this plugin has seen many releases. Thanks to everyone involved! 
-            Unfortunately, I don't have much time to contribute anymore. In practice this means far less activity, 
-            responsiveness on issues and new releases from my end.
-        </td>
-    </tr>
-    <tr style="background-color: #F0F0F01C">
-        <td>
-            Currently, there is work in progress to move this plugin to the <a href="https://izpack.org/">IzPack</a> project.
-        </td>
-    </tr>
-</table>
-
 The plugin provides a one-stop solution for packaging, distributing and deploying applications for the Java platform
 using [IzPack](https://izpack.org/).
 
@@ -25,11 +10,11 @@ using [IzPack](https://izpack.org/).
 To use the IzPack plugin, include in your build script:
 
     plugins {
-        id 'com.bmuschko.izpack' version '3.2'
+        id 'org.izpack.gradle' version '3.2.2'
     }
 
 The plugin JAR needs to be defined in the classpath of your build script. It is directly available on the
-[Gradle plugin portal](https://plugins.gradle.org/plugin/com.bmuschko.izpack). The following code snippet shows a usage example:
+[Gradle plugin portal](https://plugins.gradle.org/plugin/org.izpack). The following code snippet shows a usage example:
 
     buildscript {
         repositories {
@@ -37,18 +22,18 @@ The plugin JAR needs to be defined in the classpath of your build script. It is 
         }
 
         dependencies {
-            classpath 'com.bmuschko:gradle-izpack-plugin:3.2'
+            classpath 'org:gradle-izpack-plugin:3.2.2'
         }
     }
 
-    apply plugin: 'com.bmuschko.izpack'
+    apply plugin: 'org.izpack.gradle'
 
 To define the IzPack standalone compiler dependency please use the `izpack` configuration name in your `dependencies` closure.
 
 For IzPack v5
 
     dependencies {
-        izpack 'org.codehaus.izpack:izpack-ant:5.1.3'
+        izpack 'org.codehaus.izpack:izpack-ant:5.2.4'
     }
 
 or for IzPack v4

@@ -70,7 +70,7 @@ class IzPack4PluginFunctionalTest extends Specification {
     private String buildFileBase() {
         """
             plugins {
-                id 'com.bmuschko.izpack'
+                id 'org.izpack.gradle'
                 id 'java'
             }
             
