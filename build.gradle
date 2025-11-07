@@ -8,13 +8,15 @@ plugins {
 group = 'org.izpack'
 version = '4.0.0'
 
-repositories {
-    mavenCentral()
-}
-
 java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
     withJavadocJar()
     withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
 }
 
 jar {
@@ -66,11 +68,12 @@ tasks.named("check") {
 }
 
 gradlePlugin {
-    website = "https://github.com/izpack/izpack-gradle-plugin"
-    vcsUrl = "https://github.com/izpack/izpack-gradle-plugin"
+    website = 'https://github.com/izpack/izpack-gradle-plugin'
+    vcsUrl = 'https://github.com/izpack/izpack-gradle-plugin'
+
     plugins {
-        create('izpack-plugin') {
-            id = 'org.izpack'
+        izpackPlugin {
+            id = 'org.izpack.gradle'
             displayName = 'IzPack Gradle Plugin'
             description = 'Plugin that provides support for packaging applications for the Java platform via IzPack.'
             implementationClass = 'org.izpack.gradle.IzPackPlugin'

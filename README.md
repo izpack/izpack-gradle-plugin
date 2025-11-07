@@ -10,11 +10,11 @@ using [IzPack](https://izpack.org/).
 To use the IzPack plugin, include in your build script:
 
     plugins {
-        id 'org.izpack' version '4.0.0'
+        id 'izpack-gradle-plugin' version '4.0.0'
     }
 
 The plugin JAR needs to be defined in the classpath of your build script. It is directly available on the
-[Gradle plugin portal](https://plugins.gradle.org/plugin/org.izpack). The following code snippet shows a usage example:
+[Gradle plugin portal](https://plugins.gradle.org/plugin/org.izpack.gradle). The following code snippet shows a usage example:
 
     buildscript {
         repositories {
@@ -26,7 +26,7 @@ The plugin JAR needs to be defined in the classpath of your build script. It is 
         }
     }
 
-    apply plugin: 'org.izpack'
+    apply plugin: 'org.izpack.gradle'
 
 To define the IzPack standalone compiler dependency please use the `izpack` configuration name in your `dependencies` closure.
 

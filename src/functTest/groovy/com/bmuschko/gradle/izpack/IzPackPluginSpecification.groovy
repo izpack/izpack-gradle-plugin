@@ -19,12 +19,12 @@ abstract class IzPackPluginSpecification extends Specification {
         projectDir = tempDir.toFile()
         buildFile = tempDir.resolve('build.gradle').toFile()
         settingsFile = tempDir.resolve('settings.gradle').toFile()
-        buildFile << buildFileDefault()
         settingsFile << settingsFile()
     }
 
     def "can create installer with default settings"() {
         given:
+        buildFile << buildFileBase() + buildFileIzPackDependency()
         def installerDir = Files.createDirectories(tempDir.resolve('src/main/izpack')).toFile()
         new File(installerDir, 'install.xml') << installationFile()
         Files.createDirectories(tempDir.resolve('build/assemble/izpack'))
@@ -38,7 +38,7 @@ abstract class IzPackPluginSpecification extends Specification {
 
     def "can create installer with custom settings"() {
         given:
-        buildFile << buildFileCustomSettings()
+        buildFile << buildFileBase() + buildFileIzPackDependency() + buildFileCustomSettings()
         def installerDir = Files.createDirectories(tempDir.resolve('installer/izpack')).toFile()
         new File(installerDir, 'installer.xml') << installationFile()
         Files.createDirectories(tempDir.resolve('build/my/izpack'))
@@ -58,16 +58,11 @@ abstract class IzPackPluginSpecification extends Specification {
         GradleRunner.create().withProjectDir(projectDir).withArguments(arguments).withPluginClasspath()
     }
 
-
-    private String buildFileDefault() {
-        buildFileBase() + buildFileIzPackDependency()
-    }
-
-    private String buildFileBase() {
+    private static String buildFileBase() {
         """
         plugins {
-            id 'org.izpack'
             id 'java'
+            id 'org.izpack.gradle'
         }
         
         version = '1.0'
@@ -79,7 +74,7 @@ abstract class IzPackPluginSpecification extends Specification {
         """
     }
 
-    private String buildFileCustomSettings() {
+    private static String buildFileCustomSettings() {
         """
         izpack {
             baseDir = file("\$buildDir/my/izpack")
@@ -94,7 +89,7 @@ abstract class IzPackPluginSpecification extends Specification {
     }
 
 
-    private String settingsFile() {
+    private static String settingsFile() {
         """
         rootProject.name = 'myizpack'
         """
