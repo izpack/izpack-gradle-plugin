@@ -77,9 +77,9 @@ abstract class IzPackPluginSpecification extends Specification {
     private static String buildFileCustomSettings() {
         """
         izpack {
-            baseDir = file("\$buildDir/my/izpack")
+            baseDir =  layout.buildDirectory.dir('my/izpack')
             installFile = file('installer/izpack/installer.xml')
-            outputFile = file("\$buildDir/out/griffon-\${version}-installer.jar")
+            outputFile = layout.buildDirectory.file("out/griffon-\${version}-installer.jar")
             compression = 'deflate'
             compressionLevel = 9
             appProperties = ['app.group': 'Griffon', 'app.name': 'griffon', 'app.title': 'Griffon',

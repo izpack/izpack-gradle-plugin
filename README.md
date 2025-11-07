@@ -57,9 +57,9 @@ The IzPack plugin defines the following convention properties in the `izpack` cl
 ### Example
 
     izpack {
-        baseDir = file("$buildDir/assemble/izpack")
+        baseDir = layout.buildDirectory.dir('assemble/izpack')
         installFile = file('installer/izpack/installer.xml')
-        outputFile = file("$buildDir/distributions/griffon-${version}-installer.jar")
+        outputFile = layout.buildDirectory.dir("distributions/griffon-${version}-installer.jar")
         compression = 'deflate'
         compressionLevel = 9
         appProperties = ['app.group': 'Griffon', 'app.name': 'griffon', 'app.title': 'Griffon',
