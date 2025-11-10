@@ -1,4 +1,4 @@
-# Gradle IzPack plugin [![Build [Linux]](https://github.com/bmuschko/gradle-izpack-plugin/actions/workflows/linux-build.yaml/badge.svg)](https://github.com/bmuschko/gradle-izpack-plugin/actions/workflows/linux-build.yaml)
+# IzPack Gradle plugin [![Build [Linux]](https://github.com/izpack/izpack-gradle-plugin/actions/workflows/linux-build.yaml/badge.svg)](https://github.com/izpack/izpack-gradle-plugin/actions/workflows/linux-build.yaml)
 
 ![IzPack Logo](https://izpack.org/img-izpack/logo-medium.png)
 
@@ -10,11 +10,11 @@ using [IzPack](https://izpack.org/).
 To use the IzPack plugin, include in your build script:
 
     plugins {
-        id 'org.izpack.gradle' version '3.2.2'
+        id 'org.izpack.gradle' version '3.2.3'
     }
 
 The plugin JAR needs to be defined in the classpath of your build script. It is directly available on the
-[Gradle plugin portal](https://plugins.gradle.org/plugin/org.izpack). The following code snippet shows a usage example:
+[Gradle plugin portal](https://plugins.gradle.org/plugin/org.izpack.gradle). The following code snippet shows a usage example:
 
     buildscript {
         repositories {
@@ -22,7 +22,7 @@ The plugin JAR needs to be defined in the classpath of your build script. It is 
         }
 
         dependencies {
-            classpath 'org:gradle-izpack-plugin:3.2.2'
+            classpath 'org.izpack:izpack-gradle-plugin:3.2.3'
         }
     }
 
@@ -63,9 +63,9 @@ The IzPack plugin defines the following convention properties in the `izpack` cl
 ### Example
 
     izpack {
-        baseDir = file("$buildDir/assemble/izpack")
+        baseDir = layout.buildDirectory.dir('assemble/izpack')
         installFile = file('installer/izpack/installer.xml')
-        outputFile = file("$buildDir/distributions/griffon-${version}-installer.jar")
+        outputFile = layout.buildDirectory.file("distributions/griffon-${version}-installer.jar")
         compression = 'deflate'
         compressionLevel = 9
         appProperties = ['app.group': 'Griffon', 'app.name': 'griffon', 'app.title': 'Griffon',

@@ -1,3 +1,9 @@
+### Version 3.2.3 (November 10, 2025)
+
+* Update plugin metadata under new org.izpack.gradle
+* Fix [README](README.md) references to the plugin portal and example usages
+* Removed warning of old plugin id
+
 ### Version 3.2.2 (October 28, 2025)
 
 * Update plugin metadata under new org.izpack
