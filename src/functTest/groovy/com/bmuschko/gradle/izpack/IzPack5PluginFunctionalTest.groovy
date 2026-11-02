@@ -1,19 +1,19 @@
 package com.bmuschko.gradle.izpack
 
-class IzPack5PluginFunctionalTest extends IzPack4PluginFunctionalTest {
+class IzPack5PluginFunctionalTest extends IzPackPluginSpecification {
 
-  @Override
-  protected String buildFileIzPackDependency() {
-    """
+    @Override
+    protected String buildFileIzPackDependency() {
+        """
         dependencies {
-            izpack 'org.codehaus.izpack:izpack-ant:5.1.3'
+            izpack 'org.codehaus.izpack:izpack-ant:5.2.4'
         }
-    """
-  }
+        """
+    }
 
-  @Override
-  protected String installationFile() {
-    """
+    @Override
+    protected String installationFile() {
+        """
         <izpack:installation version="5.0"
                  xmlns:izpack="http://izpack.org/schema/installation"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -42,6 +42,6 @@ class IzPack5PluginFunctionalTest extends IzPack4PluginFunctionalTest {
                 </pack>
             </packs>
         </izpack:installation>
-    """
-  }
+        """
+    }
 }

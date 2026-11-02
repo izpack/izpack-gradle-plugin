@@ -10,7 +10,7 @@ using [IzPack](https://izpack.org/).
 To use the IzPack plugin, include in your build script:
 
     plugins {
-        id 'org.izpack.gradle' version '3.2.3'
+        id 'izpack-gradle-plugin' version '4.0.0'
     }
 
 The plugin JAR needs to be defined in the classpath of your build script. It is directly available on the
@@ -22,7 +22,7 @@ The plugin JAR needs to be defined in the classpath of your build script. It is 
         }
 
         dependencies {
-            classpath 'org.izpack:izpack-gradle-plugin:3.2.3'
+            classpath 'org.izpack:izpack-gradle-plugin:4.0.0'
         }
     }
 
@@ -34,12 +34,6 @@ For IzPack v5
 
     dependencies {
         izpack 'org.codehaus.izpack:izpack-ant:5.2.4'
-    }
-
-or for IzPack v4
-
-    dependencies {
-        izpack 'org.codehaus.izpack:izpack-standalone-compiler:4.3.5'
     }
 
 ## Tasks
